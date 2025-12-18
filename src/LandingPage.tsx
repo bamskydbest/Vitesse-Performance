@@ -6,6 +6,7 @@ export default function LandingPage() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // ✅ Fix
 
   // Hide success message after 10 seconds
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function LandingPage() {
     try {
       await fetch(formUrl, {
         method: "POST",
-        mode: "no-cors", // Required for Google Forms
+        mode: "no-cors",
         body: googleFormData,
       });
 
@@ -41,15 +42,15 @@ export default function LandingPage() {
       setLoading(false);
     }
   };
-  const services = [
-  { title: "Vehicle Diagnostics & Repairs", img: "/vehicle.jpg" },
-  { title: "Performance & Specialist Services", img: "/performance.jpg" },
-  { title: "Detailing & Vehicle Care", img: "/care.jpg" },
-  { title: "Wrapping & Paint Protection", img: "/wrapping.jpg" },
-  { title: "Parts & Consumables", img: "/parts.jpg" },
-  { title: "And more", img: "/more.jpg" },
-];
 
+  const services = [
+    { title: "Vehicle Diagnostics & Repairs", img: "/vehicle.jpg" },
+    { title: "Performance & Specialist Services", img: "/performance.jpg" },
+    { title: "Detailing & Vehicle Care", img: "/care.jpg" },
+    { title: "Wrapping & Paint Protection", img: "/wrapping.jpg" },
+    { title: "Parts & Consumables", img: "/parts.jpg" },
+    { title: "And more", img: "/more.jpg" },
+  ];
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
@@ -59,100 +60,127 @@ export default function LandingPage() {
           <div className="text-xl font-semibold tracking-wide text-black">
             VITESSE PERFORMANCE
           </div>
+
+          {/* Desktop Links */}
           <ul className="hidden md:flex gap-8 text-sm text-black/70">
             <li><a href="#about" className="hover:text-black font-medium">Who we are</a></li>
             <li><a href="#services" className="hover:text-black font-medium">Services</a></li>
             <li><a href="#contact" className="hover:text-black font-medium">Contact</a></li>
           </ul>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-black focus:outline-none"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                />
+              </svg>
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white/95 backdrop-blur border-t border-black/10">
+            <ul className="flex flex-col gap-4 px-4 py-4 text-black/70">
+              <li><a href="#about" className="hover:text-black font-medium">Who we are</a></li>
+              <li><a href="#services" className="hover:text-black font-medium">Services</a></li>
+              <li><a href="#contact" className="hover:text-black font-medium">Contact</a></li>
+            </ul>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
       <motion.section
-  initial={{ opacity: 0, y: 40 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 1 }}
-  className="relative flex items-center justify-center min-h-screen pt-24 px-4 text-center"
->
-  <div className="absolute inset-0 -z-10 bg-gradient-to-br from-purple-900/40 via-black to-black" />
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="relative flex flex-col items-center justify-center min-h-screen pt-28 px-4 text-center"
+      >
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-purple-900/40 via-black to-black" />
 
-  <div className="max-w-3xl">
-    {/* Centered H1 */}
-    <div className="w-full flex justify-center">
-      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-wide inline-flex gap-2">
-        <span>Precision</span>
-        <span className="text-purple-600">.</span>
-        <span>Performance</span>
-        <span className="text-purple-600">.</span>
-        <span>Excellence</span>
-      </h1>
-    </div>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide inline-flex flex-wrap justify-center gap-2">
+          <span>Precision</span>
+          <span className="text-purple-600">.</span>
+          <span>Performance</span>
+          <span className="text-purple-600">.</span>
+          <span>Excellence</span>
+        </h1>
 
-    <p className="mt-4 text-white/70 text-sm sm:text-base">
-      A garage without compromise
-    </p>
-    <p className="mt-8 uppercase tracking-widest text-sm sm:text-base font-bold text-white">
-      Launching January 2026
-    </p>
+        <p className="mt-4 text-white/70 text-sm sm:text-base">
+          A garage without compromise
+        </p>
+        <p className="mt-6 sm:mt-8 uppercase tracking-widest text-sm sm:text-base font-bold text-white">
+          Launching January 2026
+        </p>
 
-    {/* Form Section */}
-    <div className="mt-10">
-      <h2 className="text-lg font-semibold mb-4">Be the first to know</h2>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <input
-          type="text"
-          placeholder="Name *"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="px-4 py-3 bg-black/60 border border-white/20 rounded-lg focus:outline-none focus:border-purple-500"
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email *"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="px-4 py-3 bg-black/60 border border-white/20 rounded-lg focus:outline-none focus:border-purple-500"
-          required
-        />
-        <input
-          type="tel"
-          placeholder="Phone (optional)"
-          value={formData.phone}
-          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-          className="px-4 py-3 bg-black/60 border border-white/20 rounded-lg focus:outline-none focus:border-purple-500"
-        />
-        <button
-          type="submit"
-          className="sm:col-span-3 mt-2 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 transition font-medium"
-        >
-          {loading ? "Submitting..." : "Notify Me"}
-        </button>
-      </form>
+        {/* Form Section */}
+        <div className="mt-10 w-full max-w-4xl">
+          <h2 className="text-lg font-semibold mb-4">Be the first to know</h2>
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <input
+              type="text"
+              placeholder="Name *"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="px-4 py-3 bg-black/60 border border-white/20 rounded-lg focus:outline-none focus:border-purple-500 w-full"
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email *"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="px-4 py-3 bg-black/60 border border-white/20 rounded-lg focus:outline-none focus:border-purple-500 w-full"
+              required
+            />
+            <input
+              type="tel"
+              placeholder="Phone (optional)"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              className="px-4 py-3 bg-black/60 border border-white/20 rounded-lg focus:outline-none focus:border-purple-500 w-full"
+            />
+            <button
+              type="submit"
+              className="sm:col-span-3 mt-2 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 transition font-medium w-full"
+            >
+              {loading ? "Submitting..." : "Notify Me"}
+            </button>
+          </form>
 
-      {success && (
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="mt-4 text-green-400 text-sm"
-        >
-          You’re on the list. We’ll be in touch.
-        </motion.p>
-      )}
-    </div>
+          {success && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="mt-4 text-green-400 text-sm"
+            >
+              You’re on the list. We’ll be in touch.
+            </motion.p>
+          )}
+        </div>
 
-    {/* Social Icons */}
-    <div className="mt-8 flex justify-center gap-6 text-white/70 text-xl">
-      <a href="#" className="hover:text-white transition">
-        <FaInstagram />
-      </a>
-      <a href="#" className="hover:text-white transition">
-        <FaTiktok />
-      </a>
-    </div>
-  </div>
-</motion.section>
+        {/* Social Icons */}
+        <div className="mt-8 flex justify-center gap-6 text-white/70 text-2xl">
+          <a href="#" className="hover:text-white transition">
+            <FaInstagram />
+          </a>
+          <a href="#" className="hover:text-white transition">
+            <FaTiktok />
+          </a>
+        </div>
+      </motion.section>
+
+
 
       {/* About Section */}
       <section id="about" className="py-20 px-4 bg-black">
