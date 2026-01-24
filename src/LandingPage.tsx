@@ -170,9 +170,25 @@ export default function LandingPage() {
           </div>
 
           <div className="mt-8 flex gap-6 text-2xl text-white/70">
-            <FaInstagram />
-            <FaTiktok />
-          </div>
+  <a
+    href="https://www.instagram.com/vitesse.gh?igsh=MXFlZ2dhbTM4bDN5aA%3D%3D&utm_source=qr"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-white transition"
+  >
+    <FaInstagram />
+  </a>
+
+  <a
+    href="https://www.tiktok.com/@vitesse.gh?_r=1&_t=ZS-93Kz2uglWID"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-white transition"
+  >
+    <FaTiktok />
+  </a>
+</div>
+
         </motion.section>
 
 
@@ -235,13 +251,25 @@ export default function LandingPage() {
             <p>Location: Accra, Ghana</p>
           </div>
            <div className="mt-8 flex justify-center gap-6 text-white/70 text-xl">
-      <a href="https://www.instagram.com/vitesse.gh?igsh=MXFlZ2dhbTM4bDN5aA%3D%3D&utm_source=qr" className="hover:text-white transition">
-        <FaInstagram />
-      </a>
-      <a href="https://www.tiktok.com/@vitesse.gh?_r=1&_t=ZS-93Kz2uglWID" className="hover:text-white transition">
-        <FaTiktok />
-      </a>
-    </div>
+  <a
+    href="https://www.instagram.com/vitesse.gh?igsh=MXFlZ2dhbTM4bDN5aA%3D%3D&utm_source=qr"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-white transition"
+  >
+    <FaInstagram />
+  </a>
+
+  <a
+    href="https://www.tiktok.com/@vitesse.gh?_r=1&_t=ZS-93Kz2uglWID"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-white transition"
+  >
+    <FaTiktok />
+  </a>
+</div>
+
         </div>
       </section>
 
