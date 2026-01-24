@@ -235,10 +235,10 @@ export default function LandingPage() {
             <p>Location: Accra, Ghana</p>
           </div>
            <div className="mt-8 flex justify-center gap-6 text-white/70 text-xl">
-      <a href="#" className="hover:text-white transition">
+      <a href="https://www.instagram.com/vitesse.gh?igsh=MXFlZ2dhbTM4bDN5aA%3D%3D&utm_source=qr" className="hover:text-white transition">
         <FaInstagram />
       </a>
-      <a href="#" className="hover:text-white transition">
+      <a href="https://www.tiktok.com/@vitesse.gh?_r=1&_t=ZS-93Kz2uglWID" className="hover:text-white transition">
         <FaTiktok />
       </a>
     </div>
