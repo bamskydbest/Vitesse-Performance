@@ -41,17 +41,16 @@ export default function LandingPage() {
   };
 
   const services = [
-    { title: "Vehicle Diagnostics & Repairs", img: "/vehicle.jpg" },
-    { title: "Performance & Specialist Services", img: "/performance.jpg" },
-    { title: "Detailing & Vehicle Care", img: "/care.jpg" },
-    { title: "Wrapping & Paint Protection", img: "/wrapping.jpg" },
-    { title: "Parts & Consumables", img: "/parts.jpg" },
-    { title: "And more", img: "/more.jpg" },
+    { title: "Vehicle Diagnostics & Repairs", img: "/MIC_0041.jpg" },
+    { title: "Performance & Specialist Services", img: "/MIC_0027.jpg" },
+    { title: "Detailing & Vehicle Care", img: "/MIC_0031.jpg" },
+    { title: "Wrapping & Paint Protection", img: "/MIC_0095.jpg" },
+    { title: "Parts & Consumables", img: "/MIC_0024.jpg" },
+    { title: "And more", img: "/MIC_0065.jpg" },
   ];
 
   return (
     <div className="relative min-h-screen bg-black text-white font-sans overflow-hidden">
-      {/* Global purple zig-zag overlay */}
 <div
   aria-hidden
   className="pointer-events-none fixed inset-0 z-0 opacity-30"
@@ -75,8 +74,8 @@ export default function LandingPage() {
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
             <ul className="hidden md:flex gap-8 text-sm text-black/70">
               <li><a href="#about" className="hover:text-black font-medium">Who we are</a></li>
-              <li><a href="#services" className="hover:text-black font-medium">Services</a></li>
-              <li><a href="#contact" className="hover:text-black font-medium">Contact</a></li>
+              <li><a href="#services" className="hover:text-black font-medium">What we do</a></li>
+              <li><a href="#contact" className="hover:text-black font-medium">Contact us</a></li>
             </ul>
 
             <div className="md:hidden">
@@ -102,8 +101,8 @@ export default function LandingPage() {
             <div className="md:hidden bg-white/95 border-t border-black/10">
               <ul className="flex flex-col gap-4 px-4 py-4 text-black/70">
                 <li><a href="#about">Who we are</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#services">What we do</a></li>
+                <li><a href="#contact">Contact us</a></li>
               </ul>
             </div>
           )}
@@ -114,22 +113,22 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="min-h-screen pt-24 px-4 flex flex-col items-center justify-center text-center"
+          className="min-h-screen pt-5 px-4 flex flex-col items-center justify-center text-center"
         >
           <img
             src="/vitesse.jpg"
             alt="Vitesse logo"
-            className="w-48 sm:w-56 md:w-64 lg:w-72 mb-4"
+            className="w-56 sm:w-66 md:w-74 lg:w-82 mb-4"
           />
 
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-[Rajdhani] tracking-wider">
-            Precision<span className="text-purple-600">.</span>Performance
-            <span className="text-purple-600">.</span>Excellence
-          </h1>
+          {/* <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-[Rajdhani] tracking-wider">
+            Precision<span className="text-purple-600">|</span>Performance
+            <span className="text-purple-600">|</span>Excellence
+          </h1> */}
 
-          <p className="mt-4 text-white/70">A garage without compromise</p>
+          <p className="mt-4 text-white/70">A workshop without compromise</p>
           <p className="mt-6 uppercase tracking-widest font-bold">
-            Launching January 2026
+            Opening January 2026 | Accra
           </p>
 
           {/* Form */}
@@ -168,13 +167,14 @@ export default function LandingPage() {
               </p>
             )}
           </div>
+          <p className="mt-4" mb-4>Follow us</p>
 
           <div className="mt-8 flex gap-6 text-2xl text-white/70">
   <a
     href="https://www.instagram.com/vitesse.gh?igsh=MXFlZ2dhbTM4bDN5aA%3D%3D&utm_source=qr"
     target="_blank"
     rel="noopener noreferrer"
-    className="hover:text-white transition"
+    className="hover:text-white transition text-4xl"
   >
     <FaInstagram />
   </a>
@@ -183,7 +183,7 @@ export default function LandingPage() {
     href="https://www.tiktok.com/@vitesse.gh?_r=1&_t=ZS-93Kz2uglWID"
     target="_blank"
     rel="noopener noreferrer"
-    className="hover:text-white transition"
+    className="hover:text-white transition text-4xl"
   >
     <FaTiktok />
   </a>
@@ -198,8 +198,11 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-3xl font-bold font-['Rajdhani'] tracking-wider mb-6">Who we are</h2>
           <p className="text-white/70 leading-relaxed">
-            Vitesse is a premium automotive service centre built for owners who expect more from their vehicles—and from the people who work on them. We combine technical expertise, modern diagnostics, and meticulous attention to detail to deliver a seamless, high-quality automotive experience.
-          </p>
+Vitesse is a premium automotive service centre specialising in performance and luxury vehicles . Our team works with modern diagnostic tools, manufacturer-level parts & procedures and a clear, detail-led process to ensure every vehicle is handled properly from arrival to handover  . Our customers trust us to feel informed and at ease at each stage — with clear explanations, honest guidance and confidence that their car is in the right hands        </p>
+{/* <p className="text-white/70 leading-relaxed">
+Our team works with modern diagnostic tools, manufacturer-level parts & procedures and a clear, detail-led process to ensure every vehicle is handled properly from arrival to handover         </p>
+<p className="text-white/70 leading-relaxed">
+Our customers trust us to feel informed and at ease at each stage — with clear explanations, honest guidance and confidence that their car is in the right hands          </p> */}
         </div>
       </section>
 
@@ -213,7 +216,11 @@ export default function LandingPage() {
         className="py-20 px-4 bg-gradient-to-b from-black to-purple-950/40"
       >
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-bold font-[Rajdhani] mb-10">Our services</h2>
+          <h2 className="text-3xl font-bold font-[Rajdhani] mb-10">What we do</h2>
+           <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl mb-8 font-bold font-[Rajdhani] tracking-wider">
+            Precision<span className="text-purple-600">|</span>Performance
+            <span className="text-purple-600">|</span>Excellence
+          </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-white/80">
   {services.map((service) => (
     <div
@@ -248,14 +255,16 @@ export default function LandingPage() {
           <div className="space-y-2 text-white/80">
             <p>Email: info@vitesseperformance.com</p>
             {/* <p>Phone / WhatsApp: +233 XXX XXX XXX</p> */}
-            <p>Location: Accra, Ghana</p>
+            <p>Location: Tse Addo , Accra (close to Tse Addo Roundabout)</p>
           </div>
+          <p className="mt-4" mb-4>Follow us</p>
+
            <div className="mt-8 flex justify-center gap-6 text-white/70 text-xl">
   <a
     href="https://www.instagram.com/vitesse.gh?igsh=MXFlZ2dhbTM4bDN5aA%3D%3D&utm_source=qr"
     target="_blank"
     rel="noopener noreferrer"
-    className="hover:text-white transition"
+    className="hover:text-white transition text-4xl"
   >
     <FaInstagram />
   </a>
@@ -264,7 +273,7 @@ export default function LandingPage() {
     href="https://www.tiktok.com/@vitesse.gh?_r=1&_t=ZS-93Kz2uglWID"
     target="_blank"
     rel="noopener noreferrer"
-    className="hover:text-white transition"
+    className="hover:text-white transition text-4xl"
   >
     <FaTiktok />
   </a>
