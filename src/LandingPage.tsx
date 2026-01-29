@@ -207,43 +207,46 @@ Our customers trust us to feel informed and at ease at each stage — with clear
       </section>
 
       {/* Services Section */}
-      <motion.section
-        id="services"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="py-20 px-4 bg-gradient-to-b from-black to-purple-950/40"
-      >
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-bold font-[Rajdhani] mb-10">What we do</h2>
-           <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl mb-8 font-bold font-[Rajdhani] tracking-wider">
-            Precision<span className="text-purple-600">|</span>Performance
-            <span className="text-purple-600">|</span>Excellence
-          </h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-white/80">
-  {services.map((service) => (
-    <div
-      key={service.title}
-      className="p-6 rounded-2xl relative border border-black/20 cursor-pointer overflow-hidden 
-                 hover:border-purple-500 hover:bg-purple-900/30 hover:text-white transition-all duration-300
-                 flex items-center justify-center text-center"
-      style={{
-        backgroundImage: `url(${service.img})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        minHeight: "200px",
-      }}
-    >
-      <div className="absolute inset-0 bg-black/40 hover:bg-black/30 transition" />
-      <h3 className="relative z-10 text-lg font-[Rajdhani] font-semibold">{service.title}</h3>
-    </div>
-  ))}
-</div>
+<motion.section
+  id="services"
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8 }}
+  className="py-20 px-4 bg-gradient-to-b from-black to-purple-950/40"
+>
+  <div className="max-w-6xl mx-auto text-center">
+    {/* Main Heading */}
+    <h2 className="text-3xl font-bold font-[Rajdhani] mb-2">What we do</h2>
+    
+    {/* Subtext / Subtitle */}
+    <p className="text-sm sm:text-base md:text-lg text-white/70 font-semibold tracking-widest mb-10">
+      Precision <span className="text-purple-600">|</span> Performance <span className="text-purple-600">|</span> Excellence
+    </p>
 
-
+    {/* Services Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-white/80">
+      {services.map((service) => (
+        <div
+          key={service.title}
+          className="p-6 rounded-2xl relative border border-black/20 cursor-pointer overflow-hidden 
+                     hover:border-purple-500 hover:bg-purple-900/30 hover:text-white transition-all duration-300
+                     flex items-center justify-center text-center"
+          style={{
+            backgroundImage: `url(${service.img})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            minHeight: "200px",
+          }}
+        >
+          <div className="absolute inset-0 bg-black/40 hover:bg-black/30 transition" />
+          <h3 className="relative z-10 text-lg font-[Rajdhani] font-semibold">{service.title}</h3>
         </div>
-      </motion.section>
+      ))}
+    </div>
+  </div>
+</motion.section>
+
 
       {/* Contact Section */}
       <section id="contact" className="py-20 px-4 bg-black">
