@@ -41,12 +41,12 @@ export default function LandingPage() {
   };
 
   const services = [
-    { title: "Vehicle Diagnostics & Repairs", img: "/MIC_0041.jpg" },
-    { title: "Performance & Specialist Services", img: "/MIC_0027.jpg" },
-    { title: "Detailing & Vehicle Care", img: "/MIC_0031.jpg" },
+    { title: "Vehicle Diagnostics & Repairs", img: "/MIC_0066.jpg" },
+    { title: "Performance & Specialist Services", img: "/perform.jpg" },
+    { title: "Detailing & Vehicle Care", img: "/MIC_0043.jpg" },
     { title: "Wrapping & Paint Protection", img: "/MIC_0095.jpg" },
-    { title: "Parts & Consumables", img: "/MIC_0024.jpg" },
-    { title: "And more", img: "/MIC_0065.jpg" },
+    { title: "Parts & Consumables", img: "/consumable.jpg" },
+    { title: "And more", img: "/MIC_0012.jpg" },
   ];
 
   return (
@@ -255,7 +255,7 @@ Our customers trust us to feel informed and at ease at each stage — with clear
           <div className="space-y-2 text-white/80">
             <p>Email: info@vitesseperformance.com</p>
             {/* <p>Phone / WhatsApp: +233 XXX XXX XXX</p> */}
-            <p>Location: Tse Addo , Accra (close to Tse Addo Roundabout)</p>
+            <p>Location: Vitesse Performance | Tse Addo , Accra</p>
           </div>
           <p className="mt-4" mb-4>Follow us</p>
 
