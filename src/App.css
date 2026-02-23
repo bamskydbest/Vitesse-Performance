@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+/* Dark calendar picker icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+  cursor: pointer;
+}
+
+/* Dark backgrounds for select option elements */
+option {
+  background-color: #111111;
+  color: #e8e8e8;
+}
