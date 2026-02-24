@@ -83,9 +83,9 @@ export default function LandingPage({ onBook }: { onBook: () => void }) {
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
             {/* Brand */}
-            <a href="#" className="flex items-center">
+            {/* <a href="#" className="flex items-center">
               <img src="/vitesse.jpg" alt="Vitesse Performance" className="h-8 w-auto" />
-            </a>
+            </a> */}
 
             {/* Desktop links */}
             <ul className="hidden md:flex items-center gap-8 text-sm text-white/60">
