@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where vercel:*)",
+      "Bash(cd:*)",
+      "Bash(cd \"C:/Users/AbdulmajeedMahmoud/OneDrive - Swift Route Ltd/Desktop/vitesse-performance\" && git push origin main 2>&1)"
+    ]
+  }
+}

@@ -258,21 +258,34 @@ export default function BookingPage({ onBack }: { onBack: () => void }) {
       if (!formData.lastName.trim()) e.lastName = "Please enter your last name.";
       if (!formData.phone.trim()) e.phone = "Please enter a valid phone number.";
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) e.email = "Please enter a valid email address.";
+      if (!formData.referral) e.referral = "Please let us know how you heard about us.";
     }
     if (s === 2) {
       const yr = parseInt(formData.year);
       if (!yr || yr < 1980 || yr > 2026) e.year = "Please enter a valid year (1980–2026).";
       if (!formData.make.trim()) e.make = "Please enter the make.";
       if (!formData.model.trim()) e.model = "Please enter the model.";
+      if (!formData.variant.trim()) e.variant = "Please enter the variant or trim.";
+      if (!formData.colour.trim()) e.colour = "Please enter the vehicle colour.";
+      if (!formData.vin.trim()) e.vin = "Please enter the VIN number.";
       if (!formData.plate.trim()) e.plate = "Please enter the license plate.";
+      if (!formData.mileage.trim()) e.mileage = "Please enter the current mileage.";
+      if (!formData.transmission) e.transmission = "Please select a transmission type.";
+      if (!formData.fuelType) e.fuelType = "Please select a fuel type.";
+      if (!formData.returning) e.returning = "Please select an option.";
     }
     if (s === 3) {
       if (formData.services.length === 0) e.services = "Please select at least one service.";
       if (!formData.urgency) e.urgency = "Please select an urgency level.";
+      if (!formData.issueDesc.trim()) e.issueDesc = "Please describe the issue or symptoms.";
+      if (!formData.warningLights) e.warningLights = "Please select a warning light option.";
     }
     if (s === 4) {
       if (!formData.prefDate) e.prefDate = "Please select a preferred date.";
+      if (!formData.prefTime) e.prefTime = "Please select a preferred time slot.";
+      if (!formData.altDate) e.altDate = "Please select an alternate date.";
       if (!formData.dropoff) e.dropoff = "Please select a drop-off preference.";
+      if (!formData.additionalNotes.trim()) e.additionalNotes = "Please add any notes for our team, or enter N/A.";
     }
     return e;
   }
@@ -294,6 +307,8 @@ export default function BookingPage({ onBack }: { onBack: () => void }) {
     if (Object.keys(e).length > 0) { setErrors(e); return; }
     setLoading(true);
 
+    const ref = "VIT-" + Date.now().toString(36).toUpperCase().slice(-6);
+
     const formUrl =
       "https://docs.google.com/forms/d/e/1FAIpQLSclbwqw9Nn3Z0KJAeEdx2cFyd05hkJojY7eaeVzpzsNyqlWzw/formResponse";
 
@@ -303,9 +318,9 @@ export default function BookingPage({ onBack }: { onBack: () => void }) {
     gf.append("entry.728392937",  formData.phone);
     gf.append("entry.183730933",  formData.email);
     gf.append("entry.1124907674", formData.referral);
-    gf.append("entry.1746240739", formData.make);
-    gf.append("entry.940962336",  formData.model);
-    gf.append("entry.571064245",  formData.year);
+    gf.append("entry.1746240739", formData.year);
+    gf.append("entry.940962336",  formData.make);
+    gf.append("entry.571064245",  formData.model);
     gf.append("entry.75954403",   formData.variant);
     gf.append("entry.177631902",  formData.colour);
     gf.append("entry.1827780597", formData.vin);
@@ -323,11 +338,12 @@ export default function BookingPage({ onBack }: { onBack: () => void }) {
     gf.append("entry.177036290",  formData.altDate);
     gf.append("entry.1451392435", formData.dropoff);
     gf.append("entry.794702449",  formData.additionalNotes);
+    gf.append("entry.863064392",  ref);
 
     try {
       await fetch(formUrl, { method: "POST", mode: "no-cors", body: gf });
     } finally {
-      setRefNum("VIT-" + Date.now().toString(36).toUpperCase().slice(-6));
+      setRefNum(ref);
       setLoading(false);
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -483,13 +499,15 @@ export default function BookingPage({ onBack }: { onBack: () => void }) {
                 </div>
 
                 <div className="mb-4">
-                  <FieldLabel>How did you hear about us?</FieldLabel>
+                  <FieldLabel>How did you hear about us? <Required /></FieldLabel>
                   <CustomSelect
                     value={formData.referral}
                     onChange={(v) => setField("referral", v)}
                     options={["Google / Search", "Social Media", "Friend / Family Referral", "Roadside Signage", "Repeat Customer", "Other"]}
                     placeholder="Select an option"
+                    hasError={!!errors.referral}
                   />
+                  <FieldError msg={errors.referral} />
                 </div>
 
                 <NavRow>
@@ -530,25 +548,28 @@ export default function BookingPage({ onBack }: { onBack: () => void }) {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <FieldLabel>Variant / Trim</FieldLabel>
+                    <FieldLabel>Variant / Trim <Required /></FieldLabel>
                     <input type="text" value={formData.variant} placeholder="Trim or variant"
                       onChange={(e) => setField("variant", e.target.value)}
                       className={inputCls(errors, "variant")} />
+                    <FieldError msg={errors.variant} />
                   </div>
                   <div>
-                    <FieldLabel>Colour</FieldLabel>
+                    <FieldLabel>Colour <Required /></FieldLabel>
                     <input type="text" value={formData.colour} placeholder="Vehicle colour"
                       onChange={(e) => setField("colour", e.target.value)}
                       className={inputCls(errors, "colour")} />
+                    <FieldError msg={errors.colour} />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <FieldLabel>VIN (optional)</FieldLabel>
+                    <FieldLabel>VIN <Required /></FieldLabel>
                     <input type="text" value={formData.vin} placeholder="VIN number" maxLength={17}
                       onChange={(e) => setField("vin", e.target.value.toUpperCase())}
                       className={inputCls(errors, "vin")} />
+                    <FieldError msg={errors.vin} />
                     <p className="text-white/25 text-xs mt-1 italic">Speeds up parts ordering.</p>
                   </div>
                   <div>
@@ -562,40 +583,47 @@ export default function BookingPage({ onBack }: { onBack: () => void }) {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <FieldLabel>Current Mileage (km)</FieldLabel>
+                    <FieldLabel>Current Mileage (km) <Required /></FieldLabel>
                     <input type="number" value={formData.mileage} placeholder="Mileage in km"
                       onChange={(e) => setField("mileage", e.target.value)}
                       className={inputCls(errors, "mileage")} />
+                    <FieldError msg={errors.mileage} />
                   </div>
                   <div>
-                    <FieldLabel>Transmission</FieldLabel>
+                    <FieldLabel>Transmission <Required /></FieldLabel>
                     <CustomSelect
                       value={formData.transmission}
                       onChange={(v) => setField("transmission", v)}
                       options={["Automatic", "Manual", "CVT", "Semi-Automatic", "Not Sure"]}
                       placeholder="Select type"
+                      hasError={!!errors.transmission}
                     />
+                    <FieldError msg={errors.transmission} />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <FieldLabel>Fuel Type</FieldLabel>
+                    <FieldLabel>Fuel Type <Required /></FieldLabel>
                     <CustomSelect
                       value={formData.fuelType}
                       onChange={(v) => setField("fuelType", v)}
                       options={["Petrol", "Diesel", "Hybrid", "Electric", "LPG"]}
                       placeholder="Select type"
+                      hasError={!!errors.fuelType}
                     />
+                    <FieldError msg={errors.fuelType} />
                   </div>
                   <div>
-                    <FieldLabel>Previous Service at Vitesse?</FieldLabel>
+                    <FieldLabel>Previous Service at Vitesse? <Required /></FieldLabel>
                     <CustomSelect
                       value={formData.returning}
                       onChange={(v) => setField("returning", v)}
                       options={["No — first visit", "Yes — returning customer"]}
                       placeholder="Select"
+                      hasError={!!errors.returning}
                     />
+                    <FieldError msg={errors.returning} />
                   </div>
                 </div>
 
@@ -652,16 +680,17 @@ export default function BookingPage({ onBack }: { onBack: () => void }) {
                 <Divider />
 
                 <div className="mb-4">
-                  <FieldLabel>Describe the Issue / Symptoms</FieldLabel>
+                  <FieldLabel>Describe the Issue / Symptoms <Required /></FieldLabel>
                   <textarea value={formData.issueDesc} rows={4}
                     placeholder="Describe any symptoms, noises, warning lights, or concerns you've noticed — include when it started and how often it occurs."
                     onChange={(e) => setField("issueDesc", e.target.value)}
                     className={inputCls(errors, "issueDesc") + " resize-y"} />
+                  <FieldError msg={errors.issueDesc} />
                   <p className="text-white/25 text-xs mt-1 italic">The more detail you provide, the better we can prepare for your visit.</p>
                 </div>
 
                 <div className="mb-4">
-                  <FieldLabel>Warning Lights on Dashboard?</FieldLabel>
+                  <FieldLabel>Warning Lights on Dashboard? <Required /></FieldLabel>
                   <div className="flex flex-wrap gap-2 mt-2">
                     {WARNING_LIGHTS.map((light) => (
                       <button key={light} type="button" onClick={() => setField("warningLights", light)}
@@ -673,6 +702,7 @@ export default function BookingPage({ onBack }: { onBack: () => void }) {
                       </button>
                     ))}
                   </div>
+                  <FieldError msg={errors.warningLights} />
                 </div>
 
                 <NavRow>
@@ -697,22 +727,25 @@ export default function BookingPage({ onBack }: { onBack: () => void }) {
                     <FieldError msg={errors.prefDate} />
                   </div>
                   <div>
-                    <FieldLabel>Preferred Time</FieldLabel>
+                    <FieldLabel>Preferred Time <Required /></FieldLabel>
                     <CustomSelect
                       value={formData.prefTime}
                       onChange={(v) => setField("prefTime", v)}
                       options={TIME_SLOTS}
                       placeholder="Select a time slot"
+                      hasError={!!errors.prefTime}
                     />
+                    <FieldError msg={errors.prefTime} />
                   </div>
                 </div>
 
                 <div className="mb-4">
-                  <FieldLabel>Alternate Date (if first choice unavailable)</FieldLabel>
+                  <FieldLabel>Alternate Date (if first choice unavailable) <Required /></FieldLabel>
                   <input type="date" value={formData.altDate} min={minDate}
                     onChange={(e) => setField("altDate", e.target.value)}
                     style={{ colorScheme: "dark" }}
                     className={inputCls(errors, "altDate")} />
+                  <FieldError msg={errors.altDate} />
                 </div>
 
                 <Divider />
@@ -739,11 +772,12 @@ export default function BookingPage({ onBack }: { onBack: () => void }) {
                 <Divider />
 
                 <div className="mb-4">
-                  <FieldLabel>Additional Notes for Our Team</FieldLabel>
+                  <FieldLabel>Additional Notes for Our Team <Required /></FieldLabel>
                   <textarea value={formData.additionalNotes} rows={3}
-                    placeholder="Any additional information — preferred contact times, access instructions, work budget limits, collection deadline, etc."
+                    placeholder="Any additional information — preferred contact times, access instructions, work budget limits, collection deadline, etc. Enter N/A if none."
                     onChange={(e) => setField("additionalNotes", e.target.value)}
                     className={inputCls(errors, "additionalNotes") + " resize-y"} />
+                  <FieldError msg={errors.additionalNotes} />
                 </div>
 
                 <NavRow>
